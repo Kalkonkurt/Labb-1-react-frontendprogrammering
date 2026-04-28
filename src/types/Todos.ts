@@ -4,3 +4,8 @@ export type Todos = {
 	completed: boolean;
 	userId: number;
 };
+
+export type TodoPayload = {
+	title: string;
+	description: string;
+};
