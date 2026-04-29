@@ -2,6 +2,7 @@ import { createBrowserRouter } from 'react-router-dom';
 import RootLayout from './layouts/RootLayouts';
 import App from './App';
 import AddTodo from './components/AddTodo';
+import NotFound from './components/NotFound';
 
 const router = createBrowserRouter([
 	{
@@ -17,6 +18,10 @@ const router = createBrowserRouter([
 				element: <AddTodo />
 			}
 		]
+	},
+	{
+		path: '*',
+		element: <NotFound />
 	}
 ]);
 

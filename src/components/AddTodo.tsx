@@ -1,11 +1,13 @@
 import { useState } from 'react';
 import type { TodoPayload } from '../types/Todos';
+import { useNavigate } from 'react-router-dom';
 
 function AddTodo() {
 	const [payload, setPayload] = useState<TodoPayload>({ title: '', description: '' });
-
+	const navigate = useNavigate();
 	return (
 		<section className="demo-section">
+			<button onClick={() => navigate(-1)}>Go back</button>
 			<form className="demo-form">
 				<input
 					type="text"

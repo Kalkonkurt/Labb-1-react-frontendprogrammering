@@ -3,7 +3,6 @@ import { useEffect, useState } from 'react';
 import type { Todos, TodoPayload } from './types/Todos';
 import { fetchTodos } from './services/services';
 import axios from 'axios';
-import AddTodo from './components/AddTodo';
 
 function App() {
 	const [todos, setTodos] = useState<Todos[]>([]);
@@ -25,6 +24,7 @@ function App() {
 			console.error('Error creating', error);
 		}
 	};
+
 	return (
 		<>
 			<h1>TO DO'S</h1>
