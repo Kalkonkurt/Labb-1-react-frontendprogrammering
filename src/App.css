@@ -9,3 +9,10 @@
 .demo-form textarea {
 	width: 30rem;
 }
+
+.navbar {
+	display: flex;
+	margin: 2rem 10rem;
+	border: 1px solid red;
+	justify-content: space-evenly;
+}

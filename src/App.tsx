@@ -3,10 +3,10 @@ import { useEffect, useState } from 'react';
 import type { Todos, TodoPayload } from './types/Todos';
 import { fetchTodos } from './services/services';
 import axios from 'axios';
+import AddTodo from './components/AddTodo';
 
 function App() {
 	const [todos, setTodos] = useState<Todos[]>([]);
-	const [payload, setPayload] = useState<TodoPayload>({ title: '', description: '' });
 
 	useEffect(() => {
 		const loadTodos = async () => {
@@ -28,28 +28,10 @@ function App() {
 	return (
 		<>
 			<h1>TO DO'S</h1>
-			<section className="demo-section">
-				<form className="demo-form">
-					<input
-						type="text"
-						placeholder="write a Todo"
-						value={payload.title}
-						onChange={(e) => setPayload({ ...payload, ['title']: e.target.value })}
-					/>
-
-					<textarea
-						value={payload.description}
-						onChange={(e) => setPayload({ ...payload, ['title']: e.target.value })}
-						placeholder="Do something nice"
-						rows={4}
-					></textarea>
-				</form>
-			</section>
 			<ul>
 				{todos.map((todos) => (
 					<li key={todos.id}>
 						<h3>{todos.todo}</h3>
-						<p>{todos.userId}</p>
 					</li>
 				))}
 			</ul>
