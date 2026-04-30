@@ -6,6 +6,7 @@ export type Todos = {
 };
 
 export type TodoPayload = {
-	title: string;
-	description: string;
+	todo: string;
+	completed: boolean;
+	userId: number;
 };
