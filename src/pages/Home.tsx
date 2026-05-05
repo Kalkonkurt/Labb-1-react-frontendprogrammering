@@ -2,11 +2,13 @@ import '../App.css';
 import { useEffect, useState } from 'react';
 import type { Todos } from '../types/Todos';
 import { fetchTodos } from '../services/services';
+import DropDown from '../components/DropDown';
 
 function Home() {
 	const [todos, setTodos] = useState<Todos[]>([]);
 	const [completedTodos, setCompletedTodos] = useState<Todos[]>([]);
 	const [uncompletedTodos, setUncompletedTodos] = useState<Todos[]>([]);
+	const [filter, setFilter] = useState<'all' | 'a-z'>('all');
 
 	useEffect(() => {
 		const loadTodos = async () => {
@@ -23,6 +25,7 @@ function Home() {
 
 	return (
 		<>
+			<DropDown onChange={(value) => setFilter(value as 'all' | 'a-z')}></DropDown>
 			<h1>TO DO'S</h1>
 
 			<h2>To do</h2>
