@@ -5,22 +5,39 @@ import { fetchTodos } from '../services/services';
 
 function Home() {
 	const [todos, setTodos] = useState<Todos[]>([]);
+	const [completedTodos, setCompletedTodos] = useState<Todos[]>([]);
+	const [uncompletedTodos, setUncompletedTodos] = useState<Todos[]>([]);
 
 	useEffect(() => {
 		const loadTodos = async () => {
-			const todos = await fetchTodos();
-			setTodos(todos);
+			const allTodos = await fetchTodos();
+			setTodos(allTodos);
 		};
 		loadTodos();
 	}, []);
 
+	useEffect(() => {
+		setCompletedTodos(todos.filter((todo) => todo.completed));
+		setUncompletedTodos(todos.filter((todo) => !todo.completed));
+	}, [todos]);
+
 	return (
 		<>
 			<h1>TO DO'S</h1>
+
+			<h2>To do</h2>
 			<ul>
-				{todos.map((todos) => (
-					<li key={todos.id}>
-						<h3>{todos.todo}</h3>
+				{uncompletedTodos.map((todo) => (
+					<li key={todo.id}>
+						<h3>{todo.todo}</h3>
+					</li>
+				))}
+			</ul>
+			<h2>Done Todos</h2>
+			<ul className="doneTodos">
+				{completedTodos.map((todo) => (
+					<li key={todo.id}>
+						<h3>{todo.todo}</h3>
 					</li>
 				))}
 			</ul>
