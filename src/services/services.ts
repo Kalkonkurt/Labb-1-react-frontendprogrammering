@@ -10,3 +10,7 @@ export const fetchTodos = async () => {
 		console.log('Error fetching', error);
 	}
 };
+
+export const completeTodo = async (id: number) => {
+	await axios.put(`${API_URL}/${id}`, { completed: true });
+};

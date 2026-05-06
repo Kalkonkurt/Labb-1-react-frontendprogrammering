@@ -1,7 +1,7 @@
 import '../App.css';
 import { useEffect, useState } from 'react';
 import type { Todos } from '../types/Todos';
-import { fetchTodos } from '../services/services';
+import { fetchTodos, completeTodo } from '../services/services';
 import DropDown from '../components/DropDown';
 import Typography from '@mui/material/Typography';
 import ListItemText from '@mui/material/ListItemText';
@@ -9,6 +9,8 @@ import Card from '@mui/material/Card';
 import CardContent from '@mui/material/CardContent';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
+import Checkbox from '@mui/material/Checkbox';
+import FormControlLabel from '@mui/material/FormControlLabel';
 
 function Home() {
 	const [todos, setTodos] = useState<Todos[]>([]);
@@ -28,6 +30,13 @@ function Home() {
 		};
 		loadTodos();
 	}, []);
+
+	const handleComplete = async (id: number) => {
+		await completeTodo(id);
+		setTodos((prev) =>
+			prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo))
+		);
+	};
 
 	return (
 		<>
@@ -52,7 +61,7 @@ function Home() {
 							sx={{
 								borderRadius: 5,
 								backgroundColor: '#e9caa3a4',
-								minHeight: 160,
+								minHeight: 220,
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'center'
@@ -70,6 +79,10 @@ function Home() {
 											}
 										}
 									}}
+								/>
+								<FormControlLabel
+									control={<Checkbox onChange={() => handleComplete(todo.id)} />}
+									label="Done"
 								/>
 							</CardContent>
 						</Card>
@@ -94,7 +107,7 @@ function Home() {
 							sx={{
 								borderRadius: 5,
 								backgroundColor: '#57a94e99',
-								minHeight: 160,
+								minHeight: 220,
 								display: 'flex',
 								alignItems: 'center',
 								justifyContent: 'center'
@@ -112,6 +125,10 @@ function Home() {
 											}
 										}
 									}}
+								/>
+								<FormControlLabel
+									control={<Checkbox onChange={() => handleComplete(todo.id)} />}
+									label="Undone"
 								/>
 							</CardContent>
 						</Card>
