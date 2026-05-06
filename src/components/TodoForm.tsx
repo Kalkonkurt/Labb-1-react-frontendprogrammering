@@ -1,5 +1,7 @@
 import { useState } from 'react';
 import type { TodoPayload } from '../types/Todos';
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 type Props = {
 	onSubmit: (payload: TodoPayload) => void;
@@ -16,20 +18,20 @@ function TodoForm({ onSubmit }: Props) {
 					onSubmit(payload);
 				}}
 			>
-				<input
-					type="text"
-					placeholder="write a Todo"
+				<TextField
+					label="Write a Todo"
+					variant="outlined"
 					value={payload.todo}
 					onChange={(e) => setPayload({ ...payload, todo: e.target.value })}
 				/>
-
-				<input
+				<TextField
+					label="User ID"
+					variant="outlined"
 					type="number"
-					placeholder=" User ID"
 					value={payload.userId}
 					onChange={(e) => setPayload({ ...payload, userId: Number(e.target.value) })}
 				/>
-				<button type="submit">Add Todo</button>
+				<Button type="submit" variant="contained">Add Todo</Button>
 			</form>
 		</>
 	);

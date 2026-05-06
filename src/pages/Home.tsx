@@ -3,6 +3,12 @@ import { useEffect, useState } from 'react';
 import type { Todos } from '../types/Todos';
 import { fetchTodos } from '../services/services';
 import DropDown from '../components/DropDown';
+import Typography from '@mui/material/Typography';
+import ListItemText from '@mui/material/ListItemText';
+import Card from '@mui/material/Card';
+import CardContent from '@mui/material/CardContent';
+import Grid from '@mui/material/Grid';
+import Box from '@mui/material/Box';
 
 function Home() {
 	const [todos, setTodos] = useState<Todos[]>([]);
@@ -25,25 +31,73 @@ function Home() {
 
 	return (
 		<>
-			<DropDown onChange={(value) => setFilter(value as 'all' | 'a-z')}></DropDown>
-			<h1>TO DO'S</h1>
-
-			<h2>To do</h2>
-			<ul>
+			<Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: 2 }}>
+				<DropDown onChange={(value) => setFilter(value as 'all' | 'a-z')} />
+			</Box>
+			<Typography
+				variant="h2"
+				sx={{
+					color: '#cbccca',
+					backgroundColor: '#22271e',
+					fontWeight: 600,
+					borderRadius: '0rem',
+					padding: '0.5rem'
+				}}
+			>
+				To do
+			</Typography>
+			<Grid container spacing={2} sx={{ padding: 4 }}>
 				{uncompletedTodos.map((todo) => (
-					<li key={todo.id}>
-						<h3>{todo.todo}</h3>
-					</li>
+					<Grid size={4} key={todo.id}>
+						<Card
+							sx={{
+								borderRadius: 5,
+								backgroundColor: '#ffffff',
+								minHeight: 160,
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center'
+							}}
+						>
+							<CardContent sx={{ textAlign: 'center' }}>
+								<ListItemText primary={todo.todo} />
+							</CardContent>
+						</Card>
+					</Grid>
 				))}
-			</ul>
-			<h2>Done Todos</h2>
-			<ul className="doneTodos">
+			</Grid>
+			<Typography
+				variant="h2"
+				sx={{
+					color: '#fffff',
+					backgroundColor: '#69925a',
+					fontWeight: 600,
+					borderRadius: '0rem',
+					padding: '0.5rem'
+				}}
+			>
+				Done Todos
+			</Typography>
+			<Grid container spacing={2} sx={{ padding: 4 }}>
 				{completedTodos.map((todo) => (
-					<li key={todo.id}>
-						<h3>{todo.todo}</h3>
-					</li>
+					<Grid size={4} key={todo.id}>
+						<Card
+							sx={{
+								borderRadius: 5,
+								backgroundColor: '#ffffff',
+								minHeight: 160,
+								display: 'flex',
+								alignItems: 'center',
+								justifyContent: 'center'
+							}}
+						>
+							<CardContent sx={{ textAlign: 'center' }}>
+								<ListItemText primary={todo.todo} />
+							</CardContent>
+						</Card>
+					</Grid>
 				))}
-			</ul>
+			</Grid>
 		</>
 	);
 }

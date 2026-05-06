@@ -1,4 +1,6 @@
+import Typography from '@mui/material/Typography';
+
 function NotFound() {
-	return <div>NotFound</div>;
+	return <Typography variant="h2">404 - Sidan hittades inte</Typography>;
 }
 export default NotFound;

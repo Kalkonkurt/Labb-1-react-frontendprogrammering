@@ -2,6 +2,7 @@ import type { TodoPayload } from '../types/Todos';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import TodoForm from '../components/TodoForm';
+import Button from '@mui/material/Button';
 
 function AddTodo() {
 	const navigate = useNavigate();
@@ -21,7 +22,7 @@ function AddTodo() {
 
 	return (
 		<section className="demo-section">
-			<button onClick={() => navigate(-1)}>Go back</button>
+			<Button variant="outlined" onClick={() => navigate(-1)}>Go back</Button>
 			<TodoForm onSubmit={createTodos}></TodoForm>
 		</section>
 	);
