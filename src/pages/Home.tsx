@@ -6,9 +6,14 @@ import DropDown from '../components/DropDown';
 
 function Home() {
 	const [todos, setTodos] = useState<Todos[]>([]);
-	const [completedTodos, setCompletedTodos] = useState<Todos[]>([]);
-	const [uncompletedTodos, setUncompletedTodos] = useState<Todos[]>([]);
 	const [filter, setFilter] = useState<'all' | 'a-z'>('all');
+
+	const completedTodos = todos
+		.filter((todo) => todo.completed)
+		.sort((a, b) => (filter === 'a-z' ? a.todo.localeCompare(b.todo) : 0));
+	const uncompletedTodos = todos
+		.filter((todo) => !todo.completed)
+		.sort((a, b) => (filter === 'a-z' ? a.todo.localeCompare(b.todo) : 0));
 
 	useEffect(() => {
 		const loadTodos = async () => {
@@ -17,11 +22,6 @@ function Home() {
 		};
 		loadTodos();
 	}, []);
-
-	useEffect(() => {
-		setCompletedTodos(todos.filter((todo) => todo.completed));
-		setUncompletedTodos(todos.filter((todo) => !todo.completed));
-	}, [todos]);
 
 	return (
 		<>
