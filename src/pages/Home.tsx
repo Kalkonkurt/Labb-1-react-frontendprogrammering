@@ -31,28 +31,27 @@ function Home() {
 
 	return (
 		<>
-			<Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: 2 }}>
+			<Box sx={{ display: 'flex', justifyContent: 'flex-end', padding: 2, marginRight: '2rem' }}>
 				<DropDown onChange={(value) => setFilter(value as 'all' | 'a-z')} />
 			</Box>
 			<Typography
-				variant="h2"
+				variant="h3"
 				sx={{
-					color: '#cbccca',
-					backgroundColor: '#22271e',
-					fontWeight: 600,
-					borderRadius: '0rem',
-					padding: '0.5rem'
+					color: '#ffffff',
+					backgroundColor: '#040404',
+					borderRadius: '6rem',
+					margin: '0 12rem'
 				}}
 			>
 				To do
 			</Typography>
-			<Grid container spacing={2} sx={{ padding: 4 }}>
+			<Grid container spacing={2} sx={{ padding: 8 }}>
 				{uncompletedTodos.map((todo) => (
 					<Grid size={4} key={todo.id}>
 						<Card
 							sx={{
 								borderRadius: 5,
-								backgroundColor: '#ffffff',
+								backgroundColor: '#e9caa3a4',
 								minHeight: 160,
 								display: 'flex',
 								alignItems: 'center',
@@ -60,31 +59,41 @@ function Home() {
 							}}
 						>
 							<CardContent sx={{ textAlign: 'center' }}>
-								<ListItemText primary={todo.todo} />
+								<ListItemText
+									primary={todo.todo}
+									slotProps={{
+										primary: {
+											style: {
+												color: '#040404',
+												fontWeight: 550,
+												fontSize: '1.2rem'
+											}
+										}
+									}}
+								/>
 							</CardContent>
 						</Card>
 					</Grid>
 				))}
 			</Grid>
 			<Typography
-				variant="h2"
+				variant="h3"
 				sx={{
-					color: '#fffff',
-					backgroundColor: '#69925a',
-					fontWeight: 600,
-					borderRadius: '0rem',
-					padding: '0.5rem'
+					color: '#ffffff',
+					backgroundColor: '#040404',
+					borderRadius: '6rem',
+					margin: '0 12rem'
 				}}
 			>
 				Done Todos
 			</Typography>
-			<Grid container spacing={2} sx={{ padding: 4 }}>
+			<Grid container spacing={2} sx={{ padding: 8 }}>
 				{completedTodos.map((todo) => (
 					<Grid size={4} key={todo.id}>
 						<Card
 							sx={{
 								borderRadius: 5,
-								backgroundColor: '#ffffff',
+								backgroundColor: '#57a94e99',
 								minHeight: 160,
 								display: 'flex',
 								alignItems: 'center',
@@ -92,7 +101,18 @@ function Home() {
 							}}
 						>
 							<CardContent sx={{ textAlign: 'center' }}>
-								<ListItemText primary={todo.todo} />
+								<ListItemText
+									primary={todo.todo}
+									slotProps={{
+										primary: {
+											style: {
+												color: '#040404',
+												fontWeight: 550,
+												fontSize: '1.2rem'
+											}
+										}
+									}}
+								/>
 							</CardContent>
 						</Card>
 					</Grid>

@@ -8,7 +8,7 @@ import Typography from '@mui/material/Typography';
 
 function RootLayout() {
 	return (
-		<Box sx={{ minHeight: '100vh', backgroundColor: '#EAE9F7' }}>
+		<Box sx={{ minHeight: '100vh', backgroundColor: '#efefef' }}>
 			<AppBar
 				position="static"
 				sx={{
@@ -22,7 +22,7 @@ function RootLayout() {
 					<Typography
 						variant="h1"
 						sx={{
-							color: '#fffff',
+							color: '#f1fffc',
 							flexGrow: 1,
 							fontWeight: 500
 						}}

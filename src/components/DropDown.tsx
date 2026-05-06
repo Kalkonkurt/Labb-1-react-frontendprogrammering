@@ -6,8 +6,11 @@ type Props = {
 function DropDown({ onChange }: Props) {
 	return (
 		<>
-			<label htmlFor="drop-down" style={{ marginRight: '8px' }}>Sort by</label>
+			<label htmlFor="drop-down" style={{ color: '#22271e', marginRight: '0.5rem' }}>
+				Sort by
+			</label>
 			<Select
+				size="small"
 				name="drop-down"
 				id="drop-down"
 				onChange={(e) => onChange(e.target.value as string)}
