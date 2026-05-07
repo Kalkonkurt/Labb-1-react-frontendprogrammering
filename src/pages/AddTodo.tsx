@@ -1,6 +1,6 @@
 import type { TodoPayload } from '../types/Todos';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
+import { createTodo } from '../services/services';
 import TodoForm from '../components/TodoForm';
 import Button from '@mui/material/Button';
 import Box from '@mui/material/Box';
@@ -8,17 +8,9 @@ import Box from '@mui/material/Box';
 function AddTodo() {
 	const navigate = useNavigate();
 
-	const API_URL = 'https://dummyjson.com/todos/add';
-
 	const createTodos = async (payload: TodoPayload) => {
-		try {
-			await axios.post(`${API_URL}`, payload);
-			navigate(-1);
-		} catch (error) {
-			console.error('Error creating', error);
-		} finally {
-			console.log(payload);
-		}
+		await createTodo(payload);
+		navigate(-1);
 	};
 
 	return (

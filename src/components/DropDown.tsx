@@ -1,7 +1,7 @@
 import Select from '@mui/material/Select';
 import MenuItem from '@mui/material/MenuItem';
 type Props = {
-	onChange: (value: string) => void;
+	onChange: (value: 'all' | 'a-z') => void;
 };
 function DropDown({ onChange }: Props) {
 	return (
@@ -13,11 +13,11 @@ function DropDown({ onChange }: Props) {
 				size="small"
 				name="drop-down"
 				id="drop-down"
-				onChange={(e) => onChange(e.target.value as string)}
+				onChange={(e) => onChange(e.target.value as 'all' | 'a-z')}
 				defaultValue="all"
 			>
-				<MenuItem value="all">All</MenuItem>
-				<MenuItem value="a-z">A-Z</MenuItem>
+				<MenuItem value="all">all</MenuItem>
+				<MenuItem value="a-z">a-z</MenuItem>
 			</Select>
 		</>
 	);
