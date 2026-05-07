@@ -2,6 +2,11 @@ ProcrastiNot is a single page web application created with Typeacript and React 
 
 I have used the open API [DummyJSON](https://dummyjson.com/docs/todos) for all todo-related requests.
 
+GET - Fetches all todos on page load
+POST - Creates a new todo via the Add Todo form
+PUT - Updates a todo (mark as done/undone, edit text)
+DELETE - Deletes a todo
+
 It's a simple Todo page where you can view all todos separated if they are completed or not.
 
 What you can do:
