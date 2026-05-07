@@ -12,7 +12,7 @@ It's a simple Todo page where you can view all todos separated if they are compl
 What you can do:
 Mark them done and they will move to the done todos.
 Edit and update an existing todo.
-Delete a todo.
+Delete a todo with a confirmation dialog.
 Add a todo at the navbar 'Add Todo' where you can submit a new todo with a form.
 Sort by: all or a-z.
 
