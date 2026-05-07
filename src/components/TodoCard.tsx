@@ -14,19 +14,25 @@ import Dialog from '@mui/material/Dialog';
 import DialogTitle from '@mui/material/DialogTitle';
 import DialogActions from '@mui/material/DialogActions';
 import Button from '@mui/material/Button';
+import DialogContent from '@mui/material/DialogContent';
+import TextField from '@mui/material/TextField';
 
 type Props = {
 	todo: Todos;
 	onComplete: (id: number) => void;
 	onDelete: (id: number) => void;
+	onEdit: (id: number, newText: string) => void;
 };
 
-function TodoCard({ todo, onComplete, onDelete }: Props) {
+function TodoCard({ todo, onComplete, onDelete, onEdit }: Props) {
 	const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
 
 	const handleOpen = (e: React.MouseEvent<HTMLElement>) => setAnchorEl(e.currentTarget);
 	const handleClose = () => setAnchorEl(null);
 	const [openDialog, setOpenDialog] = useState(false);
+
+	const [openEdit, setOpenEdit] = useState(false);
+	const [editText, setEditText] = useState(todo.todo);
 
 	return (
 		<Card
@@ -45,7 +51,14 @@ function TodoCard({ todo, onComplete, onDelete }: Props) {
 					<MoreVertIcon />
 				</IconButton>
 				<Menu anchorEl={anchorEl} open={Boolean(anchorEl)} onClose={handleClose}>
-					<MenuItem onClick={handleClose}>Edit</MenuItem>
+					<MenuItem
+						onClick={() => {
+							handleClose();
+							setOpenEdit(true);
+						}}
+					>
+						Edit
+					</MenuItem>
 					<MenuItem
 						onClick={() => {
 							handleClose();
@@ -57,9 +70,11 @@ function TodoCard({ todo, onComplete, onDelete }: Props) {
 				</Menu>
 			</Box>
 			<Dialog open={openDialog} onClose={() => setOpenDialog(false)}>
-				<DialogTitle>Radera todo?</DialogTitle>
+				<DialogTitle sx={{ color: '#0a0a0a' }}>Radera todo?</DialogTitle>
 				<DialogActions>
-					<Button onClick={() => setOpenDialog(false)}>Avbryt</Button>
+					<Button sx={{ color: '#0a0a0a' }} onClick={() => setOpenDialog(false)}>
+						Avbryt
+					</Button>
 					<Button
 						color="error"
 						onClick={() => {
@@ -71,6 +86,27 @@ function TodoCard({ todo, onComplete, onDelete }: Props) {
 					</Button>
 				</DialogActions>
 			</Dialog>
+			<Dialog open={openEdit} onClose={() => setOpenEdit(false)}>
+				<DialogTitle sx={{ color: '#0a0a0a' }}>Redigera todo</DialogTitle>
+				<DialogContent>
+					<TextField value={editText} onChange={(e) => setEditText(e.target.value)} />
+				</DialogContent>
+				<DialogActions>
+					<Button sx={{ color: '#ff0000' }} onClick={() => setOpenEdit(false)}>
+						Avbryt
+					</Button>
+					<Button
+						sx={{ color: '#0a0a0a' }}
+						onClick={() => {
+							onEdit(todo.id, editText);
+							setOpenEdit(false);
+						}}
+					>
+						Spara
+					</Button>
+				</DialogActions>
+			</Dialog>
+
 			<CardContent sx={{ textAlign: 'center' }}>
 				<ListItemText
 					primary={todo.todo}

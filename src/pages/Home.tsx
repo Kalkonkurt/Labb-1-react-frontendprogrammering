@@ -1,7 +1,7 @@
 import '../App.css';
 import { useEffect, useState } from 'react';
 import type { Todos } from '../types/Todos';
-import { fetchTodos, completeTodo, deleteTodo } from '../services/services';
+import { fetchTodos, completeTodo, deleteTodo, updateTodo } from '../services/services';
 import DropDown from '../components/DropDown';
 import Typography from '@mui/material/Typography';
 import Grid from '@mui/material/Grid';
@@ -17,6 +17,7 @@ function Home() {
 	const completedTodos = todos
 		.filter((todo) => todo.completed)
 		.sort((a, b) => (filter === 'a-z' ? a.todo.localeCompare(b.todo) : 0));
+
 	const uncompletedTodos = todos
 		.filter((todo) => !todo.completed)
 		.sort((a, b) => (filter === 'a-z' ? a.todo.localeCompare(b.todo) : 0));
@@ -25,30 +26,55 @@ function Home() {
 		const loadTodos = async () => {
 			const allTodos = await fetchTodos();
 			setTodos(allTodos);
-			setLoading(false);
 		};
-		loadTodos();
+		loadTodos().finally(() => setLoading(false));
 	}, []);
 
-	if (loading) return <CircularProgress />;
+	if (loading) return (
+		<Box sx={{ display: 'flex', justifyContent: 'center', alignItems: 'center', minHeight: '50vh' }}>
+			<CircularProgress />
+		</Box>
+	);
 
 	const handleComplete = async (id: number) => {
-		await completeTodo(id);
-		setTodos((prev) =>
-			prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo))
-		);
+		try {
+			await completeTodo(id);
+			setTodos((prev) =>
+				prev.map((todo) => (todo.id === id ? { ...todo, completed: !todo.completed } : todo))
+			);
+		} catch {
+			console.log('Kunde inte uppdatera todo');
+		}
 	};
 
 	const handleDelete = async (id: number) => {
-		await deleteTodo(id);
-		setTodos((prev) => prev.filter((todo) => todo.id !== id));
+		try {
+			await deleteTodo(id);
+			setTodos((prev) => prev.filter((todo) => todo.id !== id));
+		} catch {
+			console.log('Kunde inte radera todo');
+		}
+	};
+
+	const handleEdit = async (id: number, newText: string) => {
+		try {
+			await updateTodo(id, newText);
+			setTodos((prev) => prev.map((todo) => (todo.id === id ? { ...todo, todo: newText } : todo)));
+		} catch {
+			console.log('Kunde inte redigera todo');
+		}
 	};
 
 	const renderTodos = (todos: Todos[]) => (
 		<Grid container spacing={2} sx={{ padding: 8 }}>
 			{todos.map((todo) => (
 				<Grid size={4} key={todo.id}>
-					<TodoCard todo={todo} onComplete={handleComplete} onDelete={handleDelete} />
+					<TodoCard
+						todo={todo}
+						onComplete={handleComplete}
+						onDelete={handleDelete}
+						onEdit={handleEdit}
+					/>
 				</Grid>
 			))}
 		</Grid>
