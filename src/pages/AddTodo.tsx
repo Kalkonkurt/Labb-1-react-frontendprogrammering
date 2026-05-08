@@ -10,7 +10,7 @@ function AddTodo() {
 
 	const createTodos = async (payload: TodoPayload) => {
 		await createTodo(payload);
-		navigate(-1);
+		// Dialog 'todo created'
 	};
 
 	return (
